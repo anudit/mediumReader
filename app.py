@@ -10,15 +10,18 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-	return "hi"
+	return render_template('index.html')
 
 @app.route('/read/<path:url>')
 def convert(url):
     request = requests.get(url)
     if request.status_code == 200:
-        title, author, data  = parse(url)
+        try:
+            title, author, data  = parse(url)
+        except:
+            return "Invalid URL"
         data = markdown2.markdown(data)
-        return render_template('index.html', ArticleTitle = title, ArticleAuthor = author, ArticleHTML = data)
+        return render_template('read.html', ArticleTitle = title, ArticleAuthor = author, ArticleHTML = data)
     else:
         return "Invalid URL"
 

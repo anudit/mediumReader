@@ -4,6 +4,15 @@ import bs4
 def parse(LINK, OFFLINEMODE = False):
     result = requests.get(LINK)
     soup = bs4.BeautifulSoup(result.content, features="html.parser")
+
+    try:
+        metas = soup.find_all("meta", attrs={'content':'Medium'})
+        if (len(metas) < 1):
+            return False
+    except:
+        return False
+
+
     title = soup.title.text
     author = soup.find("meta", attrs={'name':'author'})['content']
     sec = soup.find_all("div", "section-inner")

@@ -3,24 +3,40 @@
 
 <head>
   <meta charset="utf-8">
-  <title>{{ ArticleTitle }}</title>
-  <meta name="author" content="{{ ArticleAuthor }}">
-  <meta name="description" content="{{ ArticleTitle }}">
+  <title></title>
+  <meta name="author" content="Anudit Nagar">
+  <meta name="description" content="Medium Article Reader">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link href="/../static/css/dark.css" rel="stylesheet" id="themecss">
+  <link href="static/css/dark.css" rel="stylesheet" id="themecss">
 </head>
 
 <body>
-    {{ ArticleHTML | safe }}
 
+    <div class="search__container">
+        <p class="search__title">
+          Enter the Article Address
+        </p>
+        <input class="search__input" type="text" placeholder="" id="url">
+    </div>
+
+    <div class="credits__container">
+        <p class="credits__text">Made with <font color="red">❤️</font> by Anudit Nagar</p>
+    </div>
     <div class="popout" onclick="lights()">
         <div class="btn">
             <img src="/static/image/theme.png">
         </div>
     </div>
+
 </body>
 <script>
+    document.getElementById("url").addEventListener("keyup", function(event) {
+        event.preventDefault();
+        if (event.keyCode === 13) {
+            address = document.getElementById("url").value;
+            window.location = "/read/" + address;
+        }
+    });
     var darkness = true;
     function lights(){
         if (darkness){
@@ -32,6 +48,5 @@
             darkness = true;
         }
     }
-
 </script>
 </html>
