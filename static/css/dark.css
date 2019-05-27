@@ -214,3 +214,13 @@ img{
         line-height: 18px;
         color: #fff;
     }
+
+.downBtn {
+    background-color: #eee;
+    width: fit-content;
+    color: black;
+    padding: 12px;
+    border: none;
+    border-radius: 3px;
+    font-family: inherit;
+}
