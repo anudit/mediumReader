@@ -15,14 +15,16 @@
     {{ ArticleHTML | safe }}
 
     <center>
-        <input type="button" value="Save as Markdown" class="downBtn" onclick="download()" />
+        <input type="button" value="Save as Markdown" class="downBtn" onclick="downArticle()" />
     </center>
 
+    <br />
     <div class="popout" onclick="lights()">
         <div class="btn">
             <img src="/static/image/theme.png">
         </div>
     </div>
+    <br /><br />
 </body>
 <script>
     var darkness = true;
@@ -36,25 +38,20 @@
             darkness = true;
         }
     }
-    // function download(){
-    //     document.getElementsByClassName("downBtn")[0].value = 'Generating Article';
-    //     fetch('')
-    //     .then(function() {
 
-    //     })
-    //     .catch(function() {
-
-    //     });
-    // }
+    async function downArticle(){
+        let t = await download();
+        document.getElementsByClassName("downBtn")[0].value = 'Done 👍';
+    }
 
     async function download() {
-        document.getElementsByClassName("downBtn")[0].value = 'Generating Article';
+        document.getElementsByClassName("downBtn")[0].value = 'Here\'s your chance to catch a few blinks.';
         let promise = new Promise((res, rej) => {
             window.location = '{{ MdLink }}';
         });
         let result = await promise;
-        document.getElementsByClassName("downBtn")[0].value = 'Done 👍';console.log(result);
         return result;
     }
+
 </script>
 </html>
